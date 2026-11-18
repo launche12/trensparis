@@ -742,6 +742,24 @@
         "fareClass": "Standard",
         "operator": "SNCF Voyageurs"
       }
+    },
+    "paris-toulouse": {
+      "id": "paris-toulouse",
+      "origin": "Paris",
+      "label": "Toulouse Matabiau",
+      "destination": "Toulouse Matabiau",
+      "entries": [],
+      "current": null,
+      "lastValid": null
+    },
+    "toulouse-hospitalet": {
+      "id": "toulouse-hospitalet",
+      "origin": "Toulouse Matabiau",
+      "label": "L’Hospitalet-près-l’Andorre",
+      "destination": "L’Hospitalet-près-l’Andorre",
+      "entries": [],
+      "current": null,
+      "lastValid": null
     }
   },
   "alerts": [
@@ -756,4 +774,3 @@
     }
   ]
 }
-
