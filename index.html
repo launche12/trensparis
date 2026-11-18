@@ -780,6 +780,24 @@
         "fareClass": "Standard",
         "operator": "SNCF Voyageurs"
       }
+    },
+    "paris-toulouse": {
+      "id": "paris-toulouse",
+      "origin": "Paris",
+      "label": "Toulouse Matabiau",
+      "destination": "Toulouse Matabiau",
+      "entries": [],
+      "current": null,
+      "lastValid": null
+    },
+    "toulouse-hospitalet": {
+      "id": "toulouse-hospitalet",
+      "origin": "Toulouse Matabiau",
+      "label": "L’Hospitalet-près-l’Andorre",
+      "destination": "L’Hospitalet-près-l’Andorre",
+      "entries": [],
+      "current": null,
+      "lastValid": null
     }
   },
   "alerts": [
@@ -793,8 +811,7 @@
       "note": "Alerta de variação superior a 10% já comunicado nesta conversa; a consulta seguinte às 15:40 confirmou o mesmo preço."
     }
   ]
-}
-</script>
+}</script>
   <script>
     (()=>{
       const d=JSON.parse(document.getElementById('monitor-data').textContent);
@@ -838,11 +855,11 @@
         const opts=(c.options||[]).map(o=>`<div class="option"><strong>${eur(o.price)} · ${esc(o.fareClass)}</strong><span>${esc(o.departure)} → ${esc(o.arrival)} · ${esc(o.operator)}</span></div>`).join('');
         const rows=[...entries].sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<tr><td>${esc(x.date)}</td><td class="num">${eur(x.price)}</td><td>${esc(x.departure)}</td><td>${esc(x.arrival)}</td><td>${esc(x.fareClass)}</td><td>${esc(x.operator)}</td><td>${esc(dt(x.checkedAt))}</td></tr>`).join('');
         return `<article class="route">
-          <div class="route-head"><div><h2>Paris → ${esc(r.label)}</h2><small>Menor preço válido registrado por dia</small></div><span class="tag">${entries.length} registros</span></div>
-          <div class="price-row"><div><div class="price">${eur(c.price)}</div><div class="fare">${esc(c.fareClass)} · consulta ${esc(dt(c.checkedAt))}</div></div><div class="trip-time"><span>${esc(c.departure)} → ${esc(c.arrival)}</span><small>${esc(c.operator)}</small></div></div>
+          <div class="route-head"><div><h2>${esc(r.origin||'Paris')} → ${esc(r.destination||r.label)}</h2><small>Menor preço válido registrado por dia</small></div><span class="tag">${entries.length} registros</span></div>
+          <div class="price-row"><div><div class="price">${c.price==null?'—':eur(c.price)}</div><div class="fare">${c.price==null?'Aguardando primeira consulta válida':`${esc(c.fareClass||'')} · consulta ${esc(dt(c.checkedAt))}`}</div></div><div class="trip-time"><span>${c.departure?`${esc(c.departure)} → ${esc(c.arrival||'—')}`:'—'}</span><small>${esc(c.operator||'')}</small></div></div>
           <div class="chart-wrap"><div class="chart-title">Preço mínimo por dia de consulta · lacunas sem dados permanecem em branco</div>${chartSvg(entries,r.label)}</div>
           <div class="options"><h3>Opções válidas da consulta mais recente</h3><div class="option-list">${opts||'<span class="source">Nenhuma opção com preço nesta consulta.</span>'}</div>${(c.excludedOptions||[]).map(x=>`<div class="source">Excluída: ${esc(x.departureDate)} ${esc(x.departure)} · ${eur(x.price)} — ${esc(x.reason)}</div>`).join('')}</div>
-          <div class="history"><h3>Histórico diário</h3><div class="table-wrap"><table><thead><tr><th>Dia da consulta</th><th class="num">Menor preço</th><th>Partida</th><th>Chegada</th><th>Classe</th><th>Operadora</th><th>Última consulta (Brasília)</th></tr></thead><tbody>${rows}</tbody></table></div></div>
+          <div class="history"><h3>Histórico diário</h3><div class="table-wrap"><table><thead><tr><th>Dia da consulta</th><th class="num">Menor preço</th><th>Partida</th><th>Chegada</th><th>Classe</th><th>Operadora</th><th>Última consulta (Brasília)</th></tr></thead><tbody>${rows||'<tr><td colspan="7" class="source">Ainda sem consulta válida.</td></tr>'}</tbody></table></div></div>
         </article>`;
       };
       document.getElementById('routes').innerHTML=Object.values(d.routes).map(routeCard).join('');
