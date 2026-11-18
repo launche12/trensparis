@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Monitor Trainline | Paris</title>
+  <style>
+    :root{--ink:#172332;--muted:#607184;--line:#dfe6ec;--paper:#f4f7fa;--card:#fff;--blue:#2459a8;--blue-soft:#eaf1fb;--green:#14795b;--red:#aa3e39;--shadow:0 8px 28px rgba(29,48,69,.07)}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif}
+    .wrap{max-width:1380px;margin:auto;padding:32px 26px 60px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px}
+    h1{font-size:30px;line-height:1.15;margin:0 0 8px;letter-spacing:-.6px}.sub{color:var(--muted);margin:0}.tag{display:inline-flex;padding:6px 11px;border-radius:20px;background:var(--blue-soft);color:var(--blue);font-size:13px;font-weight:650;white-space:nowrap}
+    .meta{color:var(--muted);font-size:13px;text-align:right}.notice{border:1px solid #e7d8a5;background:#fff9e7;color:#65551f;border-radius:12px;padding:12px 15px;margin:0 0 20px;font-size:13px}
+    .alerts{display:grid;gap:10px;margin-bottom:20px}.alert{border-radius:12px;padding:13px 16px;background:#fff0ef;border:1px solid #efcbc8;color:#742f2d}.alert.down{background:#eaf7f1;border-color:#c5e7d8;color:#155840}
+    .route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}.route{background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);overflow:hidden}.route-head{padding:19px 20px 12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.route-head h2{margin:0;font-size:20px;letter-spacing:-.2px}.route-head small{color:var(--muted)}
+    .price-row{padding:17px 20px 13px;display:flex;align-items:flex-end;justify-content:space-between;gap:15px}.price{font-size:39px;font-weight:750;line-height:1;letter-spacing:-1px}.fare{color:var(--muted);font-size:13px;margin-top:6px}.trip-time{text-align:right;font-weight:650}.trip-time small{display:block;color:var(--muted);font-weight:400}
+    .chart-wrap{padding:0 15px 8px}.chart-title{font-size:12px;color:var(--muted);padding:0 5px}.chart{width:100%;height:210px;display:block;overflow:visible}.gridline{stroke:#e8edf2;stroke-width:1}.axis{fill:#718194;font-size:11px}.trend{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.dot{fill:#fff;stroke:var(--blue);stroke-width:2}.gap-dot{fill:#fff;stroke:var(--red);stroke-width:2.5}.chart-empty{fill:var(--muted);font-size:13px}
+    .options{padding:0 20px 18px}.options h3,.history h3{font-size:14px;margin:4px 0 9px}.option-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.option{border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:13px}.option strong{display:block;font-size:15px}.option span{color:var(--muted)}
+    .history{border-top:1px solid var(--line);padding:15px 20px 20px}.table-wrap{overflow:auto;max-height:340px;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}th,td{text-align:left;padding:8px 9px;border-bottom:1px solid #edf1f4}th{position:sticky;top:0;background:#f7f9fb;color:#526579;z-index:1;font-weight:650}tbody tr:last-child td{border-bottom:0}.num{text-align:right;font-variant-numeric:tabular-nums}.source{margin-top:10px;color:var(--muted);font-size:11px}.footer{margin-top:22px;color:var(--muted);font-size:12px;text-align:center}
+    @media(max-width:950px){.route-grid{grid-template-columns:1fr}.wrap{padding:22px 14px 42px}.meta{text-align:left}.top{display:block}.tag{margin:14px 0}.option-list{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){h1{font-size:25px}.price{font-size:34px}.option-list{grid-template-columns:1fr}.route-head{display:block}.route-head .tag{margin:8px 0 0}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div>
+        <h1>Monitor de preços Trainline</h1>
+        <p class="sub">Paris · ida · 1 adulto · viagem em 05/02/2027 · valores em EUR</p>
+      </div>
+      <div class="meta" id="updated"></div>
+    </header>
+    <div id="coverage" class="notice"></div>
+    <section id="alerts" class="alerts" aria-live="polite"></section>
+    <section id="routes" class="route-grid"></section>
+    <footer class="footer">Dados consultados no Trainline. A página recarrega a cada minuto para ler a versão atualizada deste arquivo.</footer>
+  </main>
+
+  <script id="monitor-data" type="application/json">{
+  "schemaVersion": 1,
+  "timezone": "America/Sao_Paulo",
+  "travelDate": "2027-02-05",
+  "passengers": {
+    "adults": 1
+  },
+  "updatedAt": "2026-11-18T15:40:57-03:00",
+  "historyCoverage": {
+    "importedFrom": "Imagens fornecidas pelo usuário",
+    "importedFromDate": "2026-10-13",
+    "importedThroughDate": "2026-10-31",
+    "additionalRecords": [
+      "2026-11-18"
+    ],
+    "note": "As imagens mostravam registros até 31/10. Datas sem linha recebida permanecem sem registro; não foram estimadas."
+  },
+  "routes": {
+    "barcelona": {
+      "id": "barcelona",
+      "label": "Barcelona",
+      "destination": "Barcelona",
+      "entries": [
+        {
+          "date": "2026-10-13",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-13T21:19:46-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-14",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-14T21:06:38-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-15",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-15T13:40:30-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-16",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-16T22:38:12-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-17",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-17T20:17:40-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-18",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-18T22:02:01-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-19",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-19T20:21:53-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-20",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-20T20:27:47-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-21",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-21T20:44:40-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-22",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-22T20:47:35-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-23",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-23T20:53:27-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-24",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-24T21:02:47-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-25",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-25T21:03:10-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-26",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-26T21:15:04-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-27",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-27T21:24:28-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-28",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-28T21:35:53-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-29",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-29T21:47:15-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-30",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-30T21:47:39-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-31",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "06:56 / 14:42",
+          "arrival": "13:49 / 21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-10-31T09:57:51-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-11-18",
+          "price": 109,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "14:42",
+          "arrival": "21:35",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-11-18T15:40:57-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Consulta Trainline de 18/11/2026",
+          "options": [
+            {
+              "departure": "06:56",
+              "arrival": "13:49",
+              "fareClass": "Standard",
+              "price": 119,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs"
+            },
+            {
+              "departure": "06:56",
+              "arrival": "13:49",
+              "fareClass": "First Class",
+              "price": 154,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs"
+            },
+            {
+              "departure": "14:42",
+              "arrival": "21:35",
+              "fareClass": "Standard",
+              "price": 109,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs"
+            },
+            {
+              "departure": "14:42",
+              "arrival": "21:35",
+              "fareClass": "First Class",
+              "price": 166,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs"
+            }
+          ]
+        }
+      ],
+      "current": {
+        "date": "2026-11-18",
+        "price": 109,
+        "currency": "EUR",
+        "travelDate": "2027-02-05",
+        "departure": "14:42",
+        "arrival": "21:35",
+        "fareClass": "Standard",
+        "operator": "SNCF Voyageurs",
+        "checkedAt": "2026-11-18T15:40:57-03:00",
+        "source": "Trainline — ida, 1 adulto",
+        "provenance": "Consulta Trainline de 18/11/2026",
+        "options": [
+          {
+            "departure": "06:56",
+            "arrival": "13:49",
+            "fareClass": "Standard",
+            "price": 119,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs"
+          },
+          {
+            "departure": "06:56",
+            "arrival": "13:49",
+            "fareClass": "First Class",
+            "price": 154,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs"
+          },
+          {
+            "departure": "14:42",
+            "arrival": "21:35",
+            "fareClass": "Standard",
+            "price": 109,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs"
+          },
+          {
+            "departure": "14:42",
+            "arrival": "21:35",
+            "fareClass": "First Class",
+            "price": 166,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs"
+          }
+        ]
+      },
+      "lastValid": {
+        "price": 109,
+        "currency": "EUR",
+        "checkedAt": "2026-11-18T15:40:57-03:00",
+        "departure": "14:42",
+        "arrival": "21:35",
+        "fareClass": "Standard",
+        "operator": "SNCF Voyageurs"
+      }
+    },
+    "hospitalet": {
+      "id": "hospitalet",
+      "label": "L’Hospitalet-près-l’Andorre",
+      "destination": "L’Hospitalet-près-l’Andorre",
+      "baseline": {
+        "price": 77.3,
+        "currency": "EUR",
+        "checkedAt": "2026-10-14T15:17:48-03:00",
+        "note": "Valor inicial informado pelo usuário"
+      },
+      "entries": [
+        {
+          "date": "2026-10-14",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-14T21:06:38-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-15",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-15T13:40:30-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-16",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-16T22:38:12-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-17",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-17T20:17:40-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-18",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-18T20:22:01-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-19",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-19T16:20:20-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-20",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-20T20:27:47-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-21",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-21T20:44:40-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-22",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-22T20:47:35-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-23",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-23T20:53:27-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-24",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-24T21:02:47-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-25",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-25T21:03:10-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-26",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-26T21:15:04-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-27",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-27T21:24:28-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-28",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-28T21:35:53-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-29",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-29T21:47:15-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-30",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-30T21:47:39-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-10-31",
+          "price": 77.3,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "08:26 / 12:39",
+          "arrival": "16:19 / 21:11",
+          "fareClass": "Standard",
+          "operator": "OUIGO + SNCF Voyageurs",
+          "checkedAt": "2026-10-31T09:57:51-03:00",
+          "source": "Trainline — ida, 1 adulto; conexão em Toulouse",
+          "provenance": "Screenshot fornecida pelo usuário"
+        },
+        {
+          "date": "2026-11-18",
+          "price": 132,
+          "currency": "EUR",
+          "travelDate": "2027-02-05",
+          "departure": "22:14",
+          "arrival": "09:43 (+1 dia)",
+          "fareClass": "Standard",
+          "operator": "SNCF Voyageurs",
+          "checkedAt": "2026-11-18T15:40:57-03:00",
+          "source": "Trainline — ida, 1 adulto",
+          "provenance": "Consulta Trainline de 18/11/2026",
+          "options": [
+            {
+              "departure": "10:37",
+              "arrival": "18:05",
+              "fareClass": "Standard",
+              "price": 157.3,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs + SNCF Voyageurs"
+            },
+            {
+              "departure": "10:37",
+              "arrival": "18:05",
+              "fareClass": "First Class",
+              "price": 193.3,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs + SNCF Voyageurs"
+            },
+            {
+              "departure": "22:14",
+              "arrival": "09:43 (+1 dia)",
+              "fareClass": "Standard",
+              "price": 132,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs"
+            },
+            {
+              "departure": "22:14",
+              "arrival": "09:43 (+1 dia)",
+              "fareClass": "First Class",
+              "price": 233,
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs"
+            }
+          ],
+          "excludedOptions": [
+            {
+              "departureDate": "2027-02-04",
+              "departure": "22:14",
+              "arrival": "12:08",
+              "price": 96.3,
+              "currency": "EUR",
+              "reason": "Partida em Paris fora de 05/02/2027"
+            }
+          ]
+        }
+      ],
+      "current": {
+        "date": "2026-11-18",
+        "price": 132,
+        "currency": "EUR",
+        "travelDate": "2027-02-05",
+        "departure": "22:14",
+        "arrival": "09:43 (+1 dia)",
+        "fareClass": "Standard",
+        "operator": "SNCF Voyageurs",
+        "checkedAt": "2026-11-18T15:40:57-03:00",
+        "source": "Trainline — ida, 1 adulto",
+        "provenance": "Consulta Trainline de 18/11/2026",
+        "options": [
+          {
+            "departure": "10:37",
+            "arrival": "18:05",
+            "fareClass": "Standard",
+            "price": 157.3,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs + SNCF Voyageurs"
+          },
+          {
+            "departure": "10:37",
+            "arrival": "18:05",
+            "fareClass": "First Class",
+            "price": 193.3,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs + SNCF Voyageurs"
+          },
+          {
+            "departure": "22:14",
+            "arrival": "09:43 (+1 dia)",
+            "fareClass": "Standard",
+            "price": 132,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs"
+          },
+          {
+            "departure": "22:14",
+            "arrival": "09:43 (+1 dia)",
+            "fareClass": "First Class",
+            "price": 233,
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs"
+          }
+        ],
+        "excludedOptions": [
+          {
+            "departureDate": "2027-02-04",
+            "departure": "22:14",
+            "arrival": "12:08",
+            "price": 96.3,
+            "currency": "EUR",
+            "reason": "Partida em Paris fora de 05/02/2027"
+          }
+        ]
+      },
+      "lastValid": {
+        "price": 132,
+        "currency": "EUR",
+        "checkedAt": "2026-11-18T15:40:57-03:00",
+        "departure": "22:14",
+        "arrival": "09:43 (+1 dia)",
+        "fareClass": "Standard",
+        "operator": "SNCF Voyageurs"
+      }
+    }
+  },
+  "alerts": [
+    {
+      "routeId": "hospitalet",
+      "previousPrice": 77.3,
+      "currentPrice": 132,
+      "currency": "EUR",
+      "changePercent": 70.76,
+      "checkedAt": "2026-11-18T15:30:51-03:00",
+      "note": "Alerta de variação superior a 10% já comunicado nesta conversa; a consulta seguinte às 15:40 confirmou o mesmo preço."
+    }
+  ]
+}
+</script>
+  <script>
+    (()=>{
+      const d=JSON.parse(document.getElementById('monitor-data').textContent);
+      const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const eur=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'EUR'}).format(n);
+      const dt=s=>new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'medium',timeZone:d.timezone}).format(new Date(s));
+      document.getElementById('updated').innerHTML=`Atualizado em<br><strong>${esc(dt(d.updatedAt))}</strong><br><span>${esc(d.timezone)}</span>`;
+      const cov=d.historyCoverage||{};
+      document.getElementById('coverage').textContent=`Histórico importado das imagens fornecidas: ${cov.importedFromDate||'—'} a ${cov.importedThroughDate||'—'}. ${cov.note||''}`;
+      const alerts=document.getElementById('alerts');
+      (d.alerts||[]).slice().reverse().forEach(a=>{
+        const route=d.routes[a.routeId]; if(!route)return;
+        const box=document.createElement('div');box.className='alert '+(a.changePercent<0?'down':'');
+        box.innerHTML=`<strong>${esc(route.label)}: ${a.changePercent>0?'alta':'queda'} de ${Math.abs(a.changePercent).toFixed(1)}%</strong> · ${eur(a.previousPrice)} → ${eur(a.currentPrice)} · ${esc(dt(a.checkedAt))}`;
+        alerts.appendChild(box);
+      });
+      const chartSvg=(entries,id)=>{
+        const W=760,H=205,L=54,R=15,T=12,B=30, iw=W-L-R, ih=H-T-B;
+        const arr=[...entries].sort((a,b)=>a.date.localeCompare(b.date));
+        if(!arr.length)return `<svg class="chart" viewBox="0 0 ${W} ${H}"><text x="${W/2}" y="${H/2}" text-anchor="middle" class="chart-empty">Sem histórico</text></svg>`;
+        const vals=arr.map(x=>Number(x.price)), lo=Math.min(...vals), hi=Math.max(...vals), pad=hi===lo?Math.max(1,lo*.04):(hi-lo)*.12;
+        const y0=lo-pad,y1=hi+pad, minDay=Date.parse(arr[0].date+'T00:00:00Z'),maxDay=Date.parse(arr[arr.length-1].date+'T00:00:00Z'),span=Math.max(1,maxDay-minDay);
+        const x=v=>L+(Date.parse(v.date+'T00:00:00Z')-minDay)/span*iw, y=v=>T+(y1-Number(v.price))/(y1-y0)*ih;
+        let s='';
+        for(let i=0;i<4;i++){const yy=T+ih*i/3, val=y1-(y1-y0)*i/3;s+=`<line class="gridline" x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}"/><text class="axis" x="${L-7}" y="${yy+4}" text-anchor="end">${Math.round(val)}</text>`}
+        let seg=[];
+        const flush=()=>{if(seg.length>1)s+=`<polyline class="trend" points="${seg.map(v=>`${x(v)},${y(v)}`).join(' ')}"/>`;seg=[]};
+        for(let i=0;i<arr.length;i++){
+          if(i&&((Date.parse(arr[i].date+'T00:00:00Z')-Date.parse(arr[i-1].date+'T00:00:00Z'))/86400000)>1){flush()}
+          seg.push(arr[i]);
+        }flush();
+        for(let i=0;i<arr.length;i++){
+          const p=arr[i],cx=x(p),cy=y(p);s+=`<circle class="dot" cx="${cx}" cy="${cy}" r="4"><title>${esc(p.date)} · ${eur(p.price)}</title></circle>`;
+        }
+        const first=arr[0].date,last=arr[arr.length-1].date;
+        s+=`<text class="axis" x="${L}" y="${H-7}">${esc(first)}</text><text class="axis" x="${W-R}" y="${H-7}" text-anchor="end">${esc(last)}</text>`;
+        return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Histórico de preços de ${esc(id)}">${s}</svg>`;
+      };
+      const routeCard=r=>{
+        const c=r.current||{}, entries=r.entries||[];
+        const opts=(c.options||[]).map(o=>`<div class="option"><strong>${eur(o.price)} · ${esc(o.fareClass)}</strong><span>${esc(o.departure)} → ${esc(o.arrival)} · ${esc(o.operator)}</span></div>`).join('');
+        const rows=[...entries].sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<tr><td>${esc(x.date)}</td><td class="num">${eur(x.price)}</td><td>${esc(x.departure)}</td><td>${esc(x.arrival)}</td><td>${esc(x.fareClass)}</td><td>${esc(x.operator)}</td><td>${esc(dt(x.checkedAt))}</td></tr>`).join('');
+        return `<article class="route">
+          <div class="route-head"><div><h2>Paris → ${esc(r.label)}</h2><small>Menor preço válido registrado por dia</small></div><span class="tag">${entries.length} registros</span></div>
+          <div class="price-row"><div><div class="price">${eur(c.price)}</div><div class="fare">${esc(c.fareClass)} · consulta ${esc(dt(c.checkedAt))}</div></div><div class="trip-time"><span>${esc(c.departure)} → ${esc(c.arrival)}</span><small>${esc(c.operator)}</small></div></div>
+          <div class="chart-wrap"><div class="chart-title">Preço mínimo por dia de consulta · lacunas sem dados permanecem em branco</div>${chartSvg(entries,r.label)}</div>
+          <div class="options"><h3>Opções válidas da consulta mais recente</h3><div class="option-list">${opts||'<span class="source">Nenhuma opção com preço nesta consulta.</span>'}</div>${(c.excludedOptions||[]).map(x=>`<div class="source">Excluída: ${esc(x.departureDate)} ${esc(x.departure)} · ${eur(x.price)} — ${esc(x.reason)}</div>`).join('')}</div>
+          <div class="history"><h3>Histórico diário</h3><div class="table-wrap"><table><thead><tr><th>Dia da consulta</th><th class="num">Menor preço</th><th>Partida</th><th>Chegada</th><th>Classe</th><th>Operadora</th><th>Última consulta (Brasília)</th></tr></thead><tbody>${rows}</tbody></table></div></div>
+        </article>`;
+      };
+      document.getElementById('routes').innerHTML=Object.values(d.routes).map(routeCard).join('');
+      window.setTimeout(()=>window.location.reload(),60000);
+    })();
+  </script>
+</body>
+</html>
+
