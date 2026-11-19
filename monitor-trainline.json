@@ -5,7 +5,7 @@
   "passengers": {
     "adults": 1
   },
-  "updatedAt": "2026-11-19T11:09:59-03:00",
+  "updatedAt": "2026-11-19T15:14:32-03:00",
   "historyCoverage": {
     "importedFrom": "Imagens fornecidas pelo usuário",
     "importedFromDate": "2026-10-13",
@@ -325,100 +325,100 @@
           "arrival": "21:35",
           "fareClass": "Standard",
           "operator": "SNCF Voyageurs",
-          "checkedAt": "2026-11-19T11:09:59-03:00",
+          "checkedAt": "2026-11-19T15:14:32-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
             {
-              "currency": "EUR",
               "departure": "06:56",
               "arrival": "13:49",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "Standard",
-              "price": 119,
-              "operator": "SNCF Voyageurs"
+              "price": 119.0
             },
             {
-              "currency": "EUR",
               "departure": "06:56",
               "arrival": "13:49",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "First Class",
-              "price": 154,
-              "operator": "SNCF Voyageurs"
+              "price": 154.0
             },
             {
-              "currency": "EUR",
               "departure": "14:42",
               "arrival": "21:35",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "Standard",
-              "price": 109,
-              "operator": "SNCF Voyageurs"
+              "price": 109.0
             },
             {
-              "currency": "EUR",
               "departure": "14:42",
               "arrival": "21:35",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "First Class",
-              "price": 166,
-              "operator": "SNCF Voyageurs"
+              "price": 166.0
             }
           ]
         }
       ],
       "current": {
         "date": "2026-11-19",
-        "price": 109,
-        "currency": "EUR",
         "travelDate": "2027-02-05",
-        "departure": "14:42",
-        "arrival": "21:35",
-        "fareClass": "Standard",
-        "operator": "SNCF Voyageurs",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
-        "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
+        "departure": "14:42",
+        "operator": "SNCF Voyageurs",
+        "checkedAt": "2026-11-19T15:14:32-03:00",
+        "source": "Trainline — ida, 1 adulto",
+        "arrival": "21:35",
         "options": [
           {
-            "currency": "EUR",
             "departure": "06:56",
             "arrival": "13:49",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "Standard",
-            "price": 119,
-            "operator": "SNCF Voyageurs"
+            "price": 119.0
           },
           {
-            "currency": "EUR",
             "departure": "06:56",
             "arrival": "13:49",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "First Class",
-            "price": 154,
-            "operator": "SNCF Voyageurs"
+            "price": 154.0
           },
           {
-            "currency": "EUR",
             "departure": "14:42",
             "arrival": "21:35",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "Standard",
-            "price": 109,
-            "operator": "SNCF Voyageurs"
+            "price": 109.0
           },
           {
-            "currency": "EUR",
             "departure": "14:42",
             "arrival": "21:35",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "First Class",
-            "price": 166,
-            "operator": "SNCF Voyageurs"
+            "price": 166.0
           }
-        ]
+        ],
+        "price": 109.0,
+        "fareClass": "Standard",
+        "currency": "EUR"
       },
       "lastValid": {
-        "price": 109,
+        "checkedAt": "2026-11-19T15:14:32-03:00",
+        "price": 109.0,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "14:42",
+        "operator": "SNCF Voyageurs",
         "arrival": "21:35",
-        "fareClass": "Standard",
-        "operator": "SNCF Voyageurs"
+        "fareClass": "Standard"
       }
     },
     "hospitalet": {
@@ -732,100 +732,100 @@
           "arrival": "09:43 (+1 dia)",
           "fareClass": "Standard",
           "operator": "SNCF Voyageurs",
-          "checkedAt": "2026-11-19T11:09:59-03:00",
+          "checkedAt": "2026-11-19T15:14:32-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
             {
-              "currency": "EUR",
               "departure": "10:37",
               "arrival": "18:05",
+              "currency": "EUR",
+              "operator": "TGV INOUI + Lio",
               "fareClass": "Standard",
-              "price": 157.3,
-              "operator": "SNCF Voyageurs + SNCF Voyageurs"
+              "price": 157.3
             },
             {
-              "currency": "EUR",
               "departure": "10:37",
               "arrival": "18:05",
+              "currency": "EUR",
+              "operator": "TGV INOUI + Lio",
               "fareClass": "First Class",
-              "price": 193.3,
-              "operator": "SNCF Voyageurs + SNCF Voyageurs"
+              "price": 193.3
             },
             {
-              "currency": "EUR",
               "departure": "22:14",
               "arrival": "09:43 (+1 dia)",
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs",
               "fareClass": "Standard",
-              "price": 132,
-              "operator": "SNCF Voyageurs"
+              "price": 132.0
             },
             {
-              "currency": "EUR",
               "departure": "22:14",
               "arrival": "09:43 (+1 dia)",
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs",
               "fareClass": "First Class",
-              "price": 233,
-              "operator": "SNCF Voyageurs"
+              "price": 233.0
             }
           ]
         }
       ],
       "current": {
         "date": "2026-11-19",
-        "price": 132,
-        "currency": "EUR",
         "travelDate": "2027-02-05",
-        "departure": "22:14",
-        "arrival": "09:43 (+1 dia)",
-        "fareClass": "Standard",
-        "operator": "SNCF Voyageurs",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
-        "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
+        "departure": "22:14",
+        "operator": "SNCF Voyageurs",
+        "checkedAt": "2026-11-19T15:14:32-03:00",
+        "source": "Trainline — ida, 1 adulto",
+        "arrival": "09:43 (+1 dia)",
         "options": [
           {
-            "currency": "EUR",
             "departure": "10:37",
             "arrival": "18:05",
+            "currency": "EUR",
+            "operator": "TGV INOUI + Lio",
             "fareClass": "Standard",
-            "price": 157.3,
-            "operator": "SNCF Voyageurs + SNCF Voyageurs"
+            "price": 157.3
           },
           {
-            "currency": "EUR",
             "departure": "10:37",
             "arrival": "18:05",
+            "currency": "EUR",
+            "operator": "TGV INOUI + Lio",
             "fareClass": "First Class",
-            "price": 193.3,
-            "operator": "SNCF Voyageurs + SNCF Voyageurs"
+            "price": 193.3
           },
           {
-            "currency": "EUR",
             "departure": "22:14",
             "arrival": "09:43 (+1 dia)",
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs",
             "fareClass": "Standard",
-            "price": 132,
-            "operator": "SNCF Voyageurs"
+            "price": 132.0
           },
           {
-            "currency": "EUR",
             "departure": "22:14",
             "arrival": "09:43 (+1 dia)",
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs",
             "fareClass": "First Class",
-            "price": 233,
-            "operator": "SNCF Voyageurs"
+            "price": 233.0
           }
-        ]
+        ],
+        "price": 132.0,
+        "fareClass": "Standard",
+        "currency": "EUR"
       },
       "lastValid": {
-        "price": 132,
+        "checkedAt": "2026-11-19T15:14:32-03:00",
+        "price": 132.0,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "22:14",
+        "operator": "SNCF Voyageurs",
         "arrival": "09:43 (+1 dia)",
-        "fareClass": "Standard",
-        "operator": "SNCF Voyageurs"
+        "fareClass": "Standard"
       }
     },
     "paris-toulouse": {
@@ -1050,196 +1050,196 @@
           "arrival": "13:37",
           "fareClass": "Standard",
           "operator": "SNCF Voyageurs",
-          "checkedAt": "2026-11-19T11:09:59-03:00",
+          "checkedAt": "2026-11-19T15:14:32-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
             {
-              "currency": "EUR",
               "departure": "05:57",
               "arrival": "10:46",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "Standard",
-              "price": 52,
-              "operator": "TGV INOUI"
+              "price": 52.0
             },
             {
-              "currency": "EUR",
               "departure": "05:57",
               "arrival": "10:46",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "First Class",
-              "price": 64,
-              "operator": "TGV INOUI"
+              "price": 64.0
             },
             {
-              "currency": "EUR",
               "departure": "06:28",
               "arrival": "13:37",
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs",
               "fareClass": "Standard",
-              "price": 46,
-              "operator": "SNCF Voyageurs"
+              "price": 46.0
             },
             {
-              "currency": "EUR",
               "departure": "06:28",
               "arrival": "13:37",
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs",
               "fareClass": "First Class",
-              "price": 51,
-              "operator": "SNCF Voyageurs"
+              "price": 51.0
             },
             {
-              "currency": "EUR",
               "departure": "07:06",
               "arrival": "12:35",
+              "currency": "EUR",
+              "operator": "TGV INOUI + SNCF Voyageurs",
               "fareClass": "Standard",
-              "price": 81.5,
-              "operator": "TGV INOUI + SNCF Voyageurs"
+              "price": 81.5
             },
             {
-              "currency": "EUR",
               "departure": "07:06",
               "arrival": "12:35",
+              "currency": "EUR",
+              "operator": "TGV INOUI + SNCF Voyageurs",
               "fareClass": "First Class",
-              "price": 90.5,
-              "operator": "TGV INOUI + SNCF Voyageurs"
+              "price": 90.5
             },
             {
-              "currency": "EUR",
               "departure": "08:25",
               "arrival": "15:30",
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs",
               "fareClass": "Standard",
-              "price": 55,
-              "operator": "SNCF Voyageurs"
+              "price": 55.0
             },
             {
-              "currency": "EUR",
               "departure": "08:25",
               "arrival": "15:30",
+              "currency": "EUR",
+              "operator": "SNCF Voyageurs",
               "fareClass": "First Class",
-              "price": 60,
-              "operator": "SNCF Voyageurs"
+              "price": 60.0
             },
             {
-              "currency": "EUR",
               "departure": "10:37",
               "arrival": "15:20",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "Standard",
-              "price": 129,
-              "operator": "TGV INOUI"
+              "price": 129.0
             },
             {
-              "currency": "EUR",
               "departure": "10:37",
               "arrival": "15:20",
+              "currency": "EUR",
+              "operator": "TGV INOUI",
               "fareClass": "First Class",
-              "price": 165,
-              "operator": "TGV INOUI"
+              "price": 165.0
             }
           ]
         }
       ],
       "current": {
         "date": "2026-11-19",
-        "price": 46,
-        "currency": "EUR",
         "travelDate": "2027-02-05",
-        "departure": "06:28",
-        "arrival": "13:37",
-        "fareClass": "Standard",
-        "operator": "SNCF Voyageurs",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
-        "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
+        "departure": "06:28",
+        "operator": "SNCF Voyageurs",
+        "checkedAt": "2026-11-19T15:14:32-03:00",
+        "source": "Trainline — ida, 1 adulto",
+        "arrival": "13:37",
         "options": [
           {
-            "currency": "EUR",
             "departure": "05:57",
             "arrival": "10:46",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "Standard",
-            "price": 52,
-            "operator": "TGV INOUI"
+            "price": 52.0
           },
           {
-            "currency": "EUR",
             "departure": "05:57",
             "arrival": "10:46",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "First Class",
-            "price": 64,
-            "operator": "TGV INOUI"
+            "price": 64.0
           },
           {
-            "currency": "EUR",
             "departure": "06:28",
             "arrival": "13:37",
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs",
             "fareClass": "Standard",
-            "price": 46,
-            "operator": "SNCF Voyageurs"
+            "price": 46.0
           },
           {
-            "currency": "EUR",
             "departure": "06:28",
             "arrival": "13:37",
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs",
             "fareClass": "First Class",
-            "price": 51,
-            "operator": "SNCF Voyageurs"
+            "price": 51.0
           },
           {
-            "currency": "EUR",
             "departure": "07:06",
             "arrival": "12:35",
+            "currency": "EUR",
+            "operator": "TGV INOUI + SNCF Voyageurs",
             "fareClass": "Standard",
-            "price": 81.5,
-            "operator": "TGV INOUI + SNCF Voyageurs"
+            "price": 81.5
           },
           {
-            "currency": "EUR",
             "departure": "07:06",
             "arrival": "12:35",
+            "currency": "EUR",
+            "operator": "TGV INOUI + SNCF Voyageurs",
             "fareClass": "First Class",
-            "price": 90.5,
-            "operator": "TGV INOUI + SNCF Voyageurs"
+            "price": 90.5
           },
           {
-            "currency": "EUR",
             "departure": "08:25",
             "arrival": "15:30",
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs",
             "fareClass": "Standard",
-            "price": 55,
-            "operator": "SNCF Voyageurs"
+            "price": 55.0
           },
           {
-            "currency": "EUR",
             "departure": "08:25",
             "arrival": "15:30",
+            "currency": "EUR",
+            "operator": "SNCF Voyageurs",
             "fareClass": "First Class",
-            "price": 60,
-            "operator": "SNCF Voyageurs"
+            "price": 60.0
           },
           {
-            "currency": "EUR",
             "departure": "10:37",
             "arrival": "15:20",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "Standard",
-            "price": 129,
-            "operator": "TGV INOUI"
+            "price": 129.0
           },
           {
-            "currency": "EUR",
             "departure": "10:37",
             "arrival": "15:20",
+            "currency": "EUR",
+            "operator": "TGV INOUI",
             "fareClass": "First Class",
-            "price": 165,
-            "operator": "TGV INOUI"
+            "price": 165.0
           }
-        ]
+        ],
+        "price": 46.0,
+        "fareClass": "Standard",
+        "currency": "EUR"
       },
       "lastValid": {
-        "price": 46,
+        "checkedAt": "2026-11-19T15:14:32-03:00",
+        "price": 46.0,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "06:28",
+        "operator": "SNCF Voyageurs",
         "arrival": "13:37",
-        "fareClass": "Standard",
-        "operator": "SNCF Voyageurs"
+        "fareClass": "Standard"
       }
     },
     "toulouse-hospitalet": {
@@ -1312,116 +1312,116 @@
           "arrival": "10:05",
           "fareClass": "Standard",
           "operator": "Lio",
-          "checkedAt": "2026-11-19T11:09:59-03:00",
+          "checkedAt": "2026-11-19T15:14:32-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
             {
-              "currency": "EUR",
               "departure": "07:48",
               "arrival": "10:05",
+              "currency": "EUR",
+              "operator": "Lio",
               "fareClass": "Standard",
-              "price": 28.3,
-              "operator": "Lio"
+              "price": 28.3
             },
             {
-              "currency": "EUR",
               "departure": "09:47",
               "arrival": "12:08",
+              "currency": "EUR",
+              "operator": "Lio",
               "fareClass": "Standard",
-              "price": 28.3,
-              "operator": "Lio"
+              "price": 28.3
             },
             {
-              "currency": "EUR",
               "departure": "13:47",
               "arrival": "16:19",
+              "currency": "EUR",
+              "operator": "Lio",
               "fareClass": "Standard",
-              "price": 28.3,
-              "operator": "Lio"
+              "price": 28.3
             },
             {
-              "currency": "EUR",
               "departure": "15:47",
               "arrival": "18:05",
+              "currency": "EUR",
+              "operator": "Lio",
               "fareClass": "Standard",
-              "price": 28.3,
-              "operator": "Lio"
+              "price": 28.3
             },
             {
-              "currency": "EUR",
               "departure": "18:48",
               "arrival": "21:11",
+              "currency": "EUR",
+              "operator": "Lio",
               "fareClass": "Standard",
-              "price": 28.3,
-              "operator": "Lio"
+              "price": 28.3
             }
           ]
         }
       ],
       "current": {
         "date": "2026-11-19",
-        "price": 28.3,
-        "currency": "EUR",
         "travelDate": "2027-02-05",
-        "departure": "07:48",
-        "arrival": "10:05",
-        "fareClass": "Standard",
-        "operator": "Lio",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
-        "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
+        "departure": "07:48",
+        "operator": "Lio",
+        "checkedAt": "2026-11-19T15:14:32-03:00",
+        "source": "Trainline — ida, 1 adulto",
+        "arrival": "10:05",
         "options": [
           {
-            "currency": "EUR",
             "departure": "07:48",
             "arrival": "10:05",
+            "currency": "EUR",
+            "operator": "Lio",
             "fareClass": "Standard",
-            "price": 28.3,
-            "operator": "Lio"
+            "price": 28.3
           },
           {
-            "currency": "EUR",
             "departure": "09:47",
             "arrival": "12:08",
+            "currency": "EUR",
+            "operator": "Lio",
             "fareClass": "Standard",
-            "price": 28.3,
-            "operator": "Lio"
+            "price": 28.3
           },
           {
-            "currency": "EUR",
             "departure": "13:47",
             "arrival": "16:19",
+            "currency": "EUR",
+            "operator": "Lio",
             "fareClass": "Standard",
-            "price": 28.3,
-            "operator": "Lio"
+            "price": 28.3
           },
           {
-            "currency": "EUR",
             "departure": "15:47",
             "arrival": "18:05",
+            "currency": "EUR",
+            "operator": "Lio",
             "fareClass": "Standard",
-            "price": 28.3,
-            "operator": "Lio"
+            "price": 28.3
           },
           {
-            "currency": "EUR",
             "departure": "18:48",
             "arrival": "21:11",
+            "currency": "EUR",
+            "operator": "Lio",
             "fareClass": "Standard",
-            "price": 28.3,
-            "operator": "Lio"
+            "price": 28.3
           }
-        ]
+        ],
+        "price": 28.3,
+        "fareClass": "Standard",
+        "currency": "EUR"
       },
       "lastValid": {
+        "checkedAt": "2026-11-19T15:14:32-03:00",
         "price": 28.3,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "07:48",
+        "operator": "Lio",
         "arrival": "10:05",
-        "fareClass": "Standard",
-        "operator": "Lio"
+        "fareClass": "Standard"
       }
     }
   },
