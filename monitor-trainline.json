@@ -5,7 +5,7 @@
   "passengers": {
     "adults": 1
   },
-  "updatedAt": "2026-11-19T07:13:47-03:00",
+  "updatedAt": "2026-11-19T11:09:59-03:00",
   "historyCoverage": {
     "importedFrom": "Imagens fornecidas pelo usuário",
     "importedFromDate": "2026-10-13",
@@ -325,7 +325,7 @@
           "arrival": "21:35",
           "fareClass": "Standard",
           "operator": "SNCF Voyageurs",
-          "checkedAt": "2026-11-19T07:13:47-03:00",
+          "checkedAt": "2026-11-19T11:09:59-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
@@ -373,7 +373,7 @@
         "arrival": "21:35",
         "fareClass": "Standard",
         "operator": "SNCF Voyageurs",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
         "options": [
@@ -414,7 +414,7 @@
       "lastValid": {
         "price": 109,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "14:42",
         "arrival": "21:35",
         "fareClass": "Standard",
@@ -732,7 +732,7 @@
           "arrival": "09:43 (+1 dia)",
           "fareClass": "Standard",
           "operator": "SNCF Voyageurs",
-          "checkedAt": "2026-11-19T07:13:47-03:00",
+          "checkedAt": "2026-11-19T11:09:59-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
@@ -780,7 +780,7 @@
         "arrival": "09:43 (+1 dia)",
         "fareClass": "Standard",
         "operator": "SNCF Voyageurs",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
         "options": [
@@ -821,7 +821,7 @@
       "lastValid": {
         "price": 132,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "22:14",
         "arrival": "09:43 (+1 dia)",
         "fareClass": "Standard",
@@ -1050,7 +1050,7 @@
           "arrival": "13:37",
           "fareClass": "Standard",
           "operator": "SNCF Voyageurs",
-          "checkedAt": "2026-11-19T07:13:47-03:00",
+          "checkedAt": "2026-11-19T11:09:59-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
@@ -1146,7 +1146,7 @@
         "arrival": "13:37",
         "fareClass": "Standard",
         "operator": "SNCF Voyageurs",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
         "options": [
@@ -1235,7 +1235,7 @@
       "lastValid": {
         "price": 46,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "06:28",
         "arrival": "13:37",
         "fareClass": "Standard",
@@ -1312,7 +1312,7 @@
           "arrival": "10:05",
           "fareClass": "Standard",
           "operator": "Lio",
-          "checkedAt": "2026-11-19T07:13:47-03:00",
+          "checkedAt": "2026-11-19T11:09:59-03:00",
           "source": "Trainline — ida, 1 adulto",
           "provenance": "Consulta Trainline de 2026-11-19",
           "options": [
@@ -1368,7 +1368,7 @@
         "arrival": "10:05",
         "fareClass": "Standard",
         "operator": "Lio",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "source": "Trainline — ida, 1 adulto",
         "provenance": "Consulta Trainline de 2026-11-19",
         "options": [
@@ -1417,7 +1417,7 @@
       "lastValid": {
         "price": 28.3,
         "currency": "EUR",
-        "checkedAt": "2026-11-19T07:13:47-03:00",
+        "checkedAt": "2026-11-19T11:09:59-03:00",
         "departure": "07:48",
         "arrival": "10:05",
         "fareClass": "Standard",
